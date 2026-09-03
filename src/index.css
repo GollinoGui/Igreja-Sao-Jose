@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Piazzolla:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Paleta fixa da identidade visual da Paróquia São José */
+  --color-stone-50: #f6f2e8;
+  --color-stone-200: #e4dac0;
+  --color-ink: #2a2420;
+  --color-green-deep: #2c4034;
+  --color-green-mid: #3f5c4b;
+  --color-gold: #b08a3e;
+
+  /* Cores litúrgicas dinâmicas — usadas apenas pelo indicador do dia,
+     nunca como repintura geral do site. Verde e dourado reaproveitam
+     green-deep e gold acima. */
+  --color-liturgical-purple: #4a2338;
+  --color-liturgical-red: #7c2b2e;
+
+  --font-serif: "Piazzolla", ui-serif, Georgia, serif;
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-stone-200);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-stone-50);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .hairline {
+    border-top: 1px solid var(--color-stone-200);
+  }
+
+  .content-measure {
+    max-width: 75ch;
+  }
+
+  /* Sequência de entrada orquestrada do Hero (ver src/components/Hero.jsx).
+     Usada uma única vez, ao carregar a Home — não em cada seção ao rolar. */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out both;
+  }
+}
