@@ -1,5 +1,9 @@
 import { SACRAMENTS } from "../lib/content";
 import { WhatsAppButton } from "./WhatsAppButton";
+import { Reveal } from "./Reveal";
+import { SACRAMENT_ICONS, IconTrinity } from "./icons";
+
+const ACCENTS = ["bg-gold", "bg-green-mid", "bg-terracotta"];
 
 /**
  * Os sete sacramentos, lado a lado — mesmo os que não têm CTA de WhatsApp
@@ -7,33 +11,43 @@ import { WhatsAppButton } from "./WhatsAppButton";
  */
 export function SacramentsGrid({ whatsappUrl }) {
   return (
-    <div className="grid grid-cols-1 gap-px bg-stone-200 sm:grid-cols-2 lg:grid-cols-3">
-      {SACRAMENTS.map((sacrament) => (
-        <div key={sacrament.key} className="flex flex-col gap-3 bg-stone-50 p-6">
-          <h3 className="font-serif text-xl font-semibold text-ink">{sacrament.name}</h3>
-          <p className="flex-1 text-sm text-ink/75">{sacrament.description}</p>
-          {sacrament.whatsapp ? (
-            <WhatsAppButton href={whatsappUrl} className="mt-1 self-start" />
-          ) : (
-            <span className="mt-1 inline-block w-fit rounded-full bg-stone-200 px-3 py-1 text-xs font-medium text-ink/70">
-              Nas celebrações, sem agendamento
-            </span>
-          )}
-        </div>
-      ))}
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {SACRAMENTS.map((sacrament, index) => {
+        const Icon = SACRAMENT_ICONS[sacrament.key];
+        const accent = ACCENTS[index % ACCENTS.length];
 
-      {/* preenche a última célula da grade (7 não é múltiplo de 2 nem de 3)
-          com o mesmo símbolo trinitário usado nos divisores do site */}
-      <div className="hidden items-center justify-center gap-3 bg-stone-50 p-6 text-ink/50 sm:flex">
-        <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
-          <g fill="none" stroke="var(--color-gold)" strokeWidth="1.6">
-            <circle cx="16" cy="11" r="5.2" />
-            <circle cx="11.3" cy="19" r="5.2" />
-            <circle cx="20.7" cy="19" r="5.2" />
-          </g>
-        </svg>
+        return (
+          <Reveal
+            key={sacrament.key}
+            delay={(index % 3) * 90}
+            className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-stone-200 bg-stone-50 p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+          >
+            <span className={`absolute inset-x-0 top-0 h-1 ${accent}`} aria-hidden="true" />
+            {Icon && (
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-stone-200/60 text-green-deep transition-colors duration-300 group-hover:bg-gold/15 group-hover:text-gold">
+                <Icon className="h-5 w-5" />
+              </div>
+            )}
+            <h3 className="font-serif text-xl font-semibold text-ink">{sacrament.name}</h3>
+            <p className="flex-1 text-sm text-ink/70">{sacrament.description}</p>
+            {sacrament.whatsapp ? (
+              <WhatsAppButton href={whatsappUrl} className="mt-1 self-start" />
+            ) : (
+              <span className="mt-1 inline-block w-fit rounded-full bg-stone-200 px-3 py-1 text-xs font-medium text-ink/70">
+                Nas celebrações, sem agendamento
+              </span>
+            )}
+          </Reveal>
+        );
+      })}
+
+      <Reveal
+        delay={210}
+        className="hidden items-center justify-center gap-3 rounded-2xl border border-dashed border-stone-200 p-6 text-ink/50 sm:flex"
+      >
+        <IconTrinity className="h-6 w-6 text-gold" />
         <p className="font-serif text-sm italic">Sete sacramentos, uma só fé</p>
-      </div>
+      </Reveal>
     </div>
   );
 }
