@@ -37,15 +37,9 @@ export function Hero() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const heroRef = useRef(null);
   const historyRef = useRef(null);
-  const { progress, span } = useDiagonalReveal(heroRef, historyRef);
-
-  // a foto diagonal termina de deslizar para dentro na primeira metade do
-  // intervalo medido; o texto, à direita, começa a aparecer perto do fim
-  // dessa entrada e termina no fim do intervalo
-  const imageProgress = prefersReducedMotion ? 1 : Math.min(1, progress / 0.5);
-  const textProgress = prefersReducedMotion
-    ? 1
-    : Math.min(1, Math.max(0, (progress - 0.4) / 0.6));
+  const imageRef = useRef(null);
+  const cardRef = useRef(null);
+  const { span } = useDiagonalReveal(heroRef, historyRef, imageRef, cardRef, prefersReducedMotion);
 
   function stepClass() {
     if (prefersReducedMotion) return "opacity-100";
@@ -66,13 +60,9 @@ export function Hero() {
           fundo do Hero — por isso o mesh-stone/grain subiram para este
           wrapper em vez de ficarem no <section> do Hero. */}
       <div
-        className="pointer-events-none absolute inset-x-0 z-0 hidden md:block"
-        style={{
-          top: span.top,
-          height: span.height,
-          opacity: imageProgress,
-          transform: `translateX(${(1 - imageProgress) * -48}px)`,
-        }}
+        ref={imageRef}
+        className="pointer-events-none absolute inset-x-0 z-0 hidden will-change-transform md:block"
+        style={{ top: span.top, height: span.height }}
         aria-hidden="true"
       >
         <div className="mx-auto h-full max-w-6xl px-6">
@@ -169,11 +159,8 @@ export function Hero() {
               foto diagonal; sombra via drop-shadow (não box-shadow) para
               acompanhar o contorno recortado */}
           <div
-            className="mesh-emerald grain-overlay relative ml-auto max-w-md overflow-hidden rounded-2xl p-8 text-stone-50 shadow-lift md:max-w-lg md:rounded-none md:p-10 md:shadow-none md:[clip-path:polygon(5%_0,100%_0,95%_100%,0_100%)] md:[filter:drop-shadow(0_22px_26px_rgba(15,22,18,0.4))_drop-shadow(0_6px_10px_rgba(15,22,18,0.3))]"
-            style={{
-              opacity: textProgress,
-              transform: `translateX(${(1 - textProgress) * 32}px)`,
-            }}
+            ref={cardRef}
+            className="mesh-emerald grain-overlay relative ml-auto max-w-md overflow-hidden rounded-2xl p-8 text-stone-50 shadow-lift will-change-transform md:max-w-lg md:rounded-none md:p-10 md:shadow-none md:[clip-path:polygon(5%_0,100%_0,95%_100%,0_100%)] md:[filter:drop-shadow(0_22px_26px_rgba(15,22,18,0.4))_drop-shadow(0_6px_10px_rgba(15,22,18,0.3))]"
           >
             <div className="relative z-10">
               <span className="inline-flex items-center gap-2 rounded-full bg-stone-50/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-gold-bright">
