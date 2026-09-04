@@ -5,15 +5,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Guia a entrada, por scroll, da imagem diagonal da igreja em Hero.jsx.
+ * Guia a entrada da imagem diagonal da igreja em Hero.jsx.
  *
- * O progresso é conduzido pelo GSAP ScrollTrigger (scrub) em vez de um
- * listener de scroll manual: o `scrub` numérico dá à animação uma pequena
- * inércia (ela "persegue" a posição do scroll suavizada em ~0.9s) em vez
- * de espelhar 1:1 cada evento de scroll — é isso que elimina o efeito de
- * "pulo" e deixa a entrada fluida mesmo com scroll em degraus (roda de
- * mouse). O trigger vai do meio do Hero (heroRef) até o topo da seção de
- * história (historyRef) cruzar o centro da viewport.
+ * Dispara uma única vez (ScrollTrigger `once: true`) quando o meio do Hero
+ * cruza o centro da viewport: a partir daí a imagem e o card animam com uma
+ * tween normal (duração fixa, sem scrub) e ficam parados no estado final —
+ * não voltam a animar ao rolar para cima e para baixo de novo, só depois de
+ * um reload da página.
  *
  * `span` mede, em pixels relativos ao wrapper posicionado (o pai
  * `relative` comum a heroRef e historyRef), o intervalo vertical que a
@@ -49,19 +47,16 @@ export function useDiagonalReveal(heroRef, historyRef, imageRef, cardRef, prefer
         scrollTrigger: {
           trigger: heroEl,
           start: "center center",
-          endTrigger: historyEl,
-          end: "top center",
-          scrub: 0.9,
-          invalidateOnRefresh: true,
+          once: true,
         },
         defaults: { ease: "power2.out" },
       });
 
       if (imageEl) {
-        tl.fromTo(imageEl, { opacity: 0, x: -48 }, { opacity: 1, x: 0, duration: 0.55 }, 0);
+        tl.fromTo(imageEl, { opacity: 0, x: -48 }, { opacity: 1, x: 0, duration: 1.2 }, 0);
       }
       if (cardEl) {
-        tl.fromTo(cardEl, { opacity: 0, x: 32 }, { opacity: 1, x: 0, duration: 0.55 }, 0.45);
+        tl.fromTo(cardEl, { opacity: 0, x: 32 }, { opacity: 1, x: 0, duration: 1.1 }, 0.5);
       }
     });
 
