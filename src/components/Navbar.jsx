@@ -23,7 +23,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-stone-50/95 backdrop-blur transition-transform duration-300 ${
+      className={`sticky top-6 z-50 bg-stone-50/95 backdrop-blur transition-transform duration-300 ${
         direction === "down" && !menuOpen ? "-translate-y-full" : "translate-y-0"
       }`}
     >
