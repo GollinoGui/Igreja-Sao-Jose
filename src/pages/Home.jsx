@@ -110,7 +110,7 @@ export function Home() {
 
       <GallerySection />
 
-      <Reveal as="section" className="mesh-emerald grain-overlay relative overflow-hidden py-14 text-stone-50 md:py-16">
+      <section className="mesh-emerald grain-overlay relative overflow-hidden py-14 text-stone-50 md:py-16">
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <Reveal className="mb-8 max-w-xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-stone-50/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-gold-bright">
@@ -126,7 +126,7 @@ export function Home() {
           </Reveal>
           <SacramentsCoverflow whatsappUrl={contact.whatsapp_url} />
         </div>
-      </Reveal>
+      </section>
 
       <section className="relative overflow-hidden bg-stone-200/50 py-16 md:py-20">
         <Reveal className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-6 sm:flex-row sm:items-center">
