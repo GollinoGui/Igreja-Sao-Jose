@@ -6,7 +6,7 @@ import { IconTower, IconBell, IconTrinity, IconCalendar } from "./icons";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { useDiagonalReveal } from "../hooks/useDiagonalReveal";
 import igrejaFrontal from "../assets/images/igreja-frontal.jpg";
-import igrejaDiagonal from "../assets/images/igreja-diagonal.png";
+import igrejaDiagonal from "../assets/images/igreja-diagonal.webp";
 
 const HERO_STATS = [
   { value: "1899", label: "Inauguração", icon: IconCalendar },
@@ -61,7 +61,7 @@ export function Hero() {
           wrapper em vez de ficarem no <section> do Hero. */}
       <div
         ref={imageRef}
-        className="pointer-events-none absolute inset-x-0 z-0 hidden will-change-transform md:block"
+        className="pointer-events-none absolute inset-x-0 z-0 hidden [will-change:transform,opacity] md:block"
         style={{ top: span.top, height: span.height }}
         aria-hidden="true"
       >
@@ -69,7 +69,8 @@ export function Hero() {
           <img
             src={igrejaDiagonal}
             alt="Igreja Matriz São José vista em ângulo diagonal"
-            className="h-full w-[58%] min-w-[320px] max-w-[620px] object-contain object-left-bottom [filter:drop-shadow(0_30px_30px_rgba(20,16,10,0.4))_drop-shadow(0_10px_12px_rgba(20,16,10,0.3))]"
+            decoding="async"
+            className="h-full w-[58%] min-w-[320px] max-w-[620px] object-contain object-left-bottom [filter:drop-shadow(0_20px_22px_rgba(20,16,10,0.4))]"
           />
         </div>
       </div>
