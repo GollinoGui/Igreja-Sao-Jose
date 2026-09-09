@@ -10,7 +10,7 @@ const ROWS = [
   { speed: 54, direction: "left", offset: 4 },
 ];
 
-function GalleryRow({ speed, direction, offset, paused }) {
+function GalleryRow({ speed, direction, offset }) {
   const total = GALLERY_PHOTOS.length;
   const ordered = GALLERY_PHOTOS.map((_, i) => GALLERY_PHOTOS[(i + offset) % total]);
   // Triplicado (não só duplicado): com poucas fotos-placeholder, o próprio
@@ -22,13 +22,7 @@ function GalleryRow({ speed, direction, offset, paused }) {
 
   return (
     <div className="flex w-full overflow-hidden">
-      <div
-        className={`flex shrink-0 gap-6 ${animationClass}`}
-        style={{
-          "--marquee-speed": `${speed}s`,
-          animationPlayState: paused ? "paused" : "running",
-        }}
-      >
+      <div className={`flex shrink-0 gap-6 ${animationClass}`} style={{ "--marquee-speed": `${speed}s` }}>
         {cards.map((photo, idx) => (
           <div
             key={`${photo.id}-${idx}`}
@@ -44,16 +38,19 @@ function GalleryRow({ speed, direction, offset, paused }) {
 
 /**
  * Galeria em fileiras diagonais e contínuas, revelada por GallerySection
- * (ver hooks/useCarpetReveal.js). Puramente decorativa — fotos-placeholder
- * sem legenda (ver GALLERY_PHOTOS) — por isso `alt=""` em todas e nenhum
- * texto/controle aqui dentro; a seção pai já marca `aria-hidden`.
+ * (ver hooks/useCarpetPush.js). As fileiras nunca pausam — só a abertura
+ * "de tapete" da seção-mãe congela ao terminar, a galeria em si continua
+ * passando as imagens pro resto da sessão. Puramente decorativa —
+ * fotos-placeholder sem legenda (ver GALLERY_PHOTOS) — por isso `alt=""`
+ * em todas e nenhum texto/controle aqui dentro; a seção pai já marca
+ * `aria-hidden`.
  */
-export function DiagonalGallery({ paused = false }) {
+export function DiagonalGallery() {
   return (
     <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-stone-900">
       <div className="flex w-[160%] -rotate-[14deg] flex-col gap-6">
         {ROWS.map((row) => (
-          <GalleryRow key={row.offset} {...row} paused={paused} />
+          <GalleryRow key={row.offset} {...row} />
         ))}
       </div>
     </div>

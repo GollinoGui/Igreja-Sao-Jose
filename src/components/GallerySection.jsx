@@ -1,43 +1,54 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { DiagonalGallery } from "./DiagonalGallery";
-import { useCarpetReveal } from "../hooks/useCarpetReveal";
+import { useCarpetPush } from "../hooks/useCarpetPush";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 /**
- * Seção "escondida" entre a leitura do dia e os sacramentos: some no fluxo
- * normal e só se revela (efeito de tapete se abrindo) enquanto a pessoa
- * rola por ela — ver useCarpetReveal.js. A altura de 220vh da seção é só
- * o "trilho" de scroll pro efeito; o painel visível é sempre 100vh
- * (sticky). Ao final, a animação contínua da galeria congela e a seção
- * vira normal no fluxo — os Sacramentos, logo em seguida no DOM, aparecem
- * embaixo dela como qualquer outra seção.
+ * Seção "escondida" entre a leitura do dia e os sacramentos: nasce com
+ * altura 0 (Sacramentos aparece logo abaixo da leitura do dia à primeira
+ * vista) e cresce suavemente conforme a pessoa rola, empurrando
+ * Sacramentos pra baixo — ver useCarpetPush.js. `markerRef` é só o
+ * gatilho do scroll (altura 0, nunca muda de tamanho); `boxRef` é quem
+ * de fato cresce. O conteúdo interno é fixo em 100vh e fica ancorado no
+ * topo; `overflow-hidden` na seção revela cada vez mais dele conforme a
+ * altura cresce, como um tapete se abrindo de cima pra baixo. Ao
+ * concluir, a seção trava nessa altura e vira uma seção normal do fluxo.
  *
  * `aria-hidden`: puramente decorativa (fotos-placeholder sem legenda, ver
  * GALLERY_PHOTOS), sem link ou texto único — não faz falta a leitores de
  * tela.
  */
 export function GallerySection() {
-  const sectionRef = useRef(null);
-  const curtainRef = useRef(null);
-  const [revealed, setRevealed] = useState(false);
+  const markerRef = useRef(null);
+  const boxRef = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  useCarpetReveal(sectionRef, curtainRef, prefersReducedMotion, setRevealed);
+  useCarpetPush(markerRef, boxRef, prefersReducedMotion);
 
   return (
-    <section ref={sectionRef} aria-hidden="true" className="relative" style={{ height: "220vh" }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+    <>
+      <div ref={markerRef} aria-hidden="true" style={{ height: 0 }} />
+      <section ref={boxRef} aria-hidden="true" className="relative w-full overflow-hidden" style={{ height: 0 }}>
         <div
-          ref={curtainRef}
-          className="absolute inset-0"
+          className="absolute inset-x-0 top-0"
           style={{
-            WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)",
-            maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)",
+            height: "100vh",
+            WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 100%)",
+            maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 100%)",
           }}
         >
-          <DiagonalGallery paused={revealed || prefersReducedMotion} />
+          <DiagonalGallery />
+          {/* Em vez de esmaecer pra transparente (o que revelaria o creme
+              de fundo da página), esmaece pro mesmo verde do mesh-emerald
+              dos Sacramentos — a transição parece fusão com a seção
+              seguinte, não um "buraco" antes dela. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
+            style={{ background: "linear-gradient(to bottom, transparent 0%, var(--color-green-deep) 100%)" }}
+          />
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
