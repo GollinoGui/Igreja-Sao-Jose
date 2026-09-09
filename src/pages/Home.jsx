@@ -3,7 +3,8 @@ import { Hero } from "../components/Hero";
 import { TrinityDivider } from "../components/TrinityDivider";
 import { ImportantDates } from "../components/ImportantDates";
 import { ScriptureQuote } from "../components/ScriptureQuote";
-import { SacramentsGrid } from "../components/SacramentsGrid";
+import { SacramentsCoverflow } from "../components/SacramentsCoverflow";
+import { GallerySection } from "../components/GallerySection";
 import { Reveal } from "../components/Reveal";
 import { Button } from "../components/Button";
 import { useContactInfo } from "../hooks/useContactInfo";
@@ -107,21 +108,25 @@ export function Home() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-20 md:pb-24">
-        <Reveal className="mb-10 max-w-xl">
-          <span className="text-xs font-medium uppercase tracking-wide text-terracotta">
-            Vida sacramental
-          </span>
-          <h2 className="mt-3 font-serif text-2xl font-semibold text-ink md:text-3xl">
-            Sete sacramentos, uma só fé
-          </h2>
-          <p className="mt-3 text-ink/70">
-            Da Eucaristia celebrada em toda missa ao Matrimônio preparado com
-            cuidado — conheça os sacramentos que marcam a vida da comunidade.
-          </p>
-        </Reveal>
-        <SacramentsGrid whatsappUrl={contact.whatsapp_url} />
-      </section>
+      <GallerySection />
+
+      <Reveal as="section" className="mesh-emerald grain-overlay relative overflow-hidden py-14 text-stone-50 md:py-16">
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <Reveal className="mb-8 max-w-xl">
+            <span className="inline-flex items-center gap-2 rounded-full bg-stone-50/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-gold-bright">
+              Vida sacramental
+            </span>
+            <h2 id="sacraments-heading" className="mt-4 font-serif text-2xl font-semibold md:text-3xl">
+              Sete sacramentos, uma só fé
+            </h2>
+            <p className="mt-3 text-stone-50/75">
+              Da Eucaristia celebrada em toda missa ao Matrimônio preparado com
+              cuidado — conheça os sacramentos que marcam a vida da comunidade.
+            </p>
+          </Reveal>
+          <SacramentsCoverflow whatsappUrl={contact.whatsapp_url} />
+        </div>
+      </Reveal>
 
       <section className="relative overflow-hidden bg-stone-200/50 py-16 md:py-20">
         <Reveal className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-6 sm:flex-row sm:items-center">

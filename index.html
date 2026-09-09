@@ -16,6 +16,18 @@
     />
     <meta property="og:locale" content="pt_BR" />
     <title>Paróquia São José — Orlândia-SP</title>
+    <script>
+      // Sem isso, o navegador restaura a posição de scroll de antes do
+      // refresh — e como a seção da galeria (GallerySection.jsx) nasce com
+      // altura 0 e só cresce por interação, um refresh no meio da página
+      // reapareceria "no lugar errado", sem a galeria ter crescido ainda.
+      // Precisa rodar antes do navegador restaurar o scroll, daí o inline
+      // script síncrono no <head> em vez de um useEffect no React.
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -62,7 +62,10 @@ export const HISTORY_MILESTONES = [
 
 // Os sete sacramentos. `whatsapp: true` indica que o item aciona o CTA de
 // WhatsApp para a secretaria; os demais acontecem no fluxo normal das
-// missas/celebrações e não exigem agendamento.
+// missas/celebrações e não exigem agendamento. `image` é opcional — quando
+// preenchida (import local de src/assets/images ou URL), o cartão do
+// SacramentsCoverflow usa a foto como fundo em vez do ícone sobre fundo
+// claro; deixe `null` até haver uma foto real do sacramento.
 export const SACRAMENTS = [
   {
     key: "batismo",
@@ -70,6 +73,7 @@ export const SACRAMENTS = [
     description:
       'Celebrado em nome do Pai, do Filho e do Espírito Santo, o Batismo acolhe a criança (ou o adulto) na família da Igreja.',
     whatsapp: true,
+    image: null,
   },
   {
     key: "crisma",
@@ -77,6 +81,7 @@ export const SACRAMENTS = [
     description:
       "Fortalece com os dons do Espírito Santo os batizados que já participam da catequese paroquial.",
     whatsapp: true,
+    image: null,
   },
   {
     key: "eucaristia",
@@ -84,6 +89,7 @@ export const SACRAMENTS = [
     description:
       "Celebrada em todas as missas da paróquia — não exige agendamento prévio.",
     whatsapp: false,
+    image: null,
   },
   {
     key: "confissao",
@@ -91,6 +97,7 @@ export const SACRAMENTS = [
     description:
       "Disponível antes das missas ou em horário combinado com um dos padres da paróquia.",
     whatsapp: false,
+    image: null,
   },
   {
     key: "uncao",
@@ -98,6 +105,7 @@ export const SACRAMENTS = [
     description:
       "Para quem enfrenta doença grave ou fragilidade pela idade — atendimento também em domicílio ou hospital.",
     whatsapp: true,
+    image: null,
   },
   {
     key: "ordem",
@@ -105,6 +113,7 @@ export const SACRAMENTS = [
     description:
       "Discernimento vocacional para o diaconato e o sacerdócio, acompanhado junto à Diocese de Franca.",
     whatsapp: true,
+    image: null,
   },
   {
     key: "matrimonio",
@@ -112,7 +121,21 @@ export const SACRAMENTS = [
     description:
       "Casamento na Igreja, com preparação de noivos conduzida pela equipe paroquial.",
     whatsapp: true,
+    image: null,
   },
+];
+
+// Fotos-placeholder da galeria diagonal da Home (seção entre a leitura do
+// dia e os sacramentos). Aleatórias de propósito — trocar pelas fotos reais
+// da paróquia assim que o site for aprovado pelo cliente, via o futuro
+// painel admin.
+export const GALLERY_PHOTOS = [
+  { id: "g1", url: "https://picsum.photos/seed/paroquia-1/640/480", alt: "" },
+  { id: "g2", url: "https://picsum.photos/seed/paroquia-2/640/480", alt: "" },
+  { id: "g3", url: "https://picsum.photos/seed/paroquia-3/640/480", alt: "" },
+  { id: "g4", url: "https://picsum.photos/seed/paroquia-4/640/480", alt: "" },
+  { id: "g5", url: "https://picsum.photos/seed/paroquia-5/640/480", alt: "" },
+  { id: "g6", url: "https://picsum.photos/seed/paroquia-6/640/480", alt: "" },
 ];
 
 // Outros serviços pastorais frequentes que não são sacramentos, mas seguem

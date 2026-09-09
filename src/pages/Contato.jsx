@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useContactInfo } from "../hooks/useContactInfo";
 import { OTHER_SERVICES } from "../lib/content";
-import { SacramentsGrid } from "../components/SacramentsGrid";
+import { SacramentsCoverflow } from "../components/SacramentsCoverflow";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import { TrinityDivider } from "../components/TrinityDivider";
 import { Reveal } from "../components/Reveal";
@@ -102,18 +102,20 @@ export function Contato() {
 
       <TrinityDivider className="mx-auto max-w-6xl px-6" />
 
-      <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <Reveal className="mb-10 max-w-xl">
-          <h2 className="font-serif text-2xl font-semibold text-ink md:text-3xl">
-            Sacramentos e serviços
-          </h2>
-          <p className="mt-3 content-measure text-ink/75">
-            A Igreja reconhece sete sacramentos. Alguns pedem agendamento com
-            a secretaria; outros acontecem naturalmente nas celebrações.
-          </p>
-        </Reveal>
-        <SacramentsGrid whatsappUrl={contact.whatsapp_url} />
-      </section>
+      <Reveal as="section" className="mesh-emerald grain-overlay relative overflow-hidden py-12 text-stone-50 md:py-14">
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <Reveal className="mb-8 max-w-xl">
+            <h2 className="font-serif text-2xl font-semibold md:text-3xl">
+              Sacramentos e serviços
+            </h2>
+            <p className="mt-3 content-measure text-stone-50/75">
+              A Igreja reconhece sete sacramentos. Alguns pedem agendamento com
+              a secretaria; outros acontecem naturalmente nas celebrações.
+            </p>
+          </Reveal>
+          <SacramentsCoverflow whatsappUrl={contact.whatsapp_url} />
+        </div>
+      </Reveal>
 
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <Reveal as="h2" className="font-serif text-xl font-semibold text-ink">

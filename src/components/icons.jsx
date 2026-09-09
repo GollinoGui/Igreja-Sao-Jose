@@ -205,6 +205,38 @@ export function IconCalendar({ className }) {
   );
 }
 
+export function IconChevronLeft({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M14.5 5 8 12l6.5 7" />
+    </Svg>
+  );
+}
+
+export function IconChevronRight({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M9.5 5 16 12l-6.5 7" />
+    </Svg>
+  );
+}
+
+export function IconPause({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M8 5.5v13M16 5.5v13" />
+    </Svg>
+  );
+}
+
+export function IconPlay({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M7.5 4.8v14.4l11-7.2-11-7.2Z" />
+    </Svg>
+  );
+}
+
 export function IconTrinity({ className }) {
   return (
     <Svg className={className}>

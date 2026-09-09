@@ -165,4 +165,28 @@
   .animate-pulse-soft {
     animation: pulse-soft 3.2s ease-in-out infinite;
   }
+
+  /* Fileiras da galeria diagonal (ver GallerySection.jsx) — translação pura
+     (translate3d), sem opacity/filter, pra ficar leve mesmo com várias
+     fileiras rodando ao mesmo tempo. Velocidade por fileira via
+     --marquee-speed (inline, cada fileira tem a sua). */
+  @keyframes marquee-left {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes marquee-right {
+    from {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .animate-marquee-left {
+    animation: marquee-left var(--marquee-speed, 60s) linear infinite;
+  }
+
+  .animate-marquee-right {
+    animation: marquee-right var(--marquee-speed, 60s) linear infinite;
+  }
 }
