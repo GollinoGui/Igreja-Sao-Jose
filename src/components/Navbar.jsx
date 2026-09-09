@@ -45,7 +45,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-6 z-50 bg-stone-50/90 backdrop-blur-md transition-all duration-300 ${
+      className={`sticky top-0 z-50 bg-stone-50/90 backdrop-blur-md transition-all duration-300 ${
         direction === "down" && !menuOpen ? "-translate-y-full" : "translate-y-0"
       } ${scrolled ? "shadow-soft" : ""}`}
     >

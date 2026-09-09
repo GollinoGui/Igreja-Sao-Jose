@@ -1,24 +1,34 @@
 import { useScrollProgress } from "../hooks/useScrollProgress";
+import { useScrollDirection } from "../hooks/useScrollDirection";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import hostia from "../assets/images/hostia.jpg";
 import hostiaLocal from "../assets/images/hostia-local.png";
 
 /**
- * Barra fixa no topo do site, acima da Navbar (ver Layout.jsx e o
- * `sticky top-6` da Navbar, que reserva o espaço desta barra). Conforme a
- * pessoa rola a página, uma hóstia percorre a barra até chegar ao ícone
- * fixo à direita — o lugar onde ela repousa (ostensório).
+ * Barra fixa no topo do site, ocupando o mesmo espaço da Navbar (ver
+ * Layout.jsx). Ela só aparece quando a Navbar some ao rolar para baixo —
+ * as duas nunca ficam visíveis ao mesmo tempo. Conforme a pessoa rola a
+ * página, uma hóstia percorre a barra até chegar ao ícone fixo à
+ * direita — o lugar onde ela repousa (ostensório).
  */
 export function ScrollProgressBar() {
   const progress = useScrollProgress();
+  const direction = useScrollDirection();
   const prefersReducedMotion = usePrefersReducedMotion();
   const arrived = progress >= 99.5;
+  const visible = direction === "down";
 
   return (
     <div
       role="presentation"
       aria-hidden="true"
-      className="fixed inset-x-0 top-0 z-[70] flex h-6 items-center gap-3 bg-stone-50/95 px-4 backdrop-blur"
+      className={`fixed inset-x-0 top-0 z-[70] flex h-9 items-center gap-3 bg-stone-50/95 px-4 backdrop-blur transition-transform duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+      style={{
+        WebkitMaskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
+        maskImage: "linear-gradient(to bottom, black 65%, transparent 100%)",
+      }}
     >
       <div className="relative h-[3px] flex-1 rounded-full bg-stone-200">
         <div
@@ -41,7 +51,7 @@ export function ScrollProgressBar() {
       </div>
 
       <div
-        className={`flex h-5 w-5 shrink-0 items-center justify-center transition-transform duration-300 ${
+        className={`flex h-9 w-9 shrink-0 items-center justify-center transition-transform duration-300 ${
           arrived && !prefersReducedMotion ? "scale-125" : "scale-100"
         }`}
       >
