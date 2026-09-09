@@ -78,6 +78,16 @@ export function useCarpetPush(markerRef, boxRef, prefersReducedMotion) {
     }
 
     window.addEventListener("resize", handleResize);
+    console.log(
+      "[debug] ScrollTrigger snapshot:",
+      JSON.stringify(
+        ScrollTrigger.getAll().map((st) => ({
+          isThisMarker: st.trigger === markerEl,
+          start: Math.round(st.start),
+          end: Math.round(st.end),
+        }))
+      )
+    );
     return () => {
       window.removeEventListener("resize", handleResize);
       ctx.revert();
