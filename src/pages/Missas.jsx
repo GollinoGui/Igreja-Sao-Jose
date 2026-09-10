@@ -1,27 +1,13 @@
 import { useEffect, useMemo } from "react";
 import { useMassSchedule } from "../hooks/useMassSchedule";
+import { groupMassScheduleByDay } from "../lib/massSchedule";
 import { ScriptureQuote } from "../components/ScriptureQuote";
 import { Reveal } from "../components/Reveal";
 import { IconClock } from "../components/icons";
 
-function groupByDay(schedule) {
-  const order = [];
-  const map = new Map();
-
-  for (const item of schedule) {
-    if (!map.has(item.day_label)) {
-      map.set(item.day_label, []);
-      order.push(item.day_label);
-    }
-    map.get(item.day_label).push(item);
-  }
-
-  return order.map((day_label) => ({ day_label, items: map.get(day_label) }));
-}
-
 export function Missas() {
   const { schedule, loading, isFallback } = useMassSchedule();
-  const grouped = useMemo(() => groupByDay(schedule), [schedule]);
+  const grouped = useMemo(() => groupMassScheduleByDay(schedule), [schedule]);
 
   useEffect(() => {
     document.title = "Horários de Missa — Paróquia São José";

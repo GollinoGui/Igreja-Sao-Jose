@@ -69,7 +69,7 @@ function getAdventStart(year) {
   return addDays(lastSundayBeforeChristmas, -21);
 }
 
-const COLORS = {
+export const COLORS = {
   green: { name: "Verde", hex: "var(--color-green-deep)", token: "green-deep" },
   purple: { name: "Roxo", hex: "var(--color-liturgical-purple)", token: "liturgical-purple" },
   red: { name: "Vermelho", hex: "var(--color-liturgical-red)", token: "liturgical-red" },

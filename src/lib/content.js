@@ -20,6 +20,12 @@ export const CONTACT_FALLBACK = {
   instagram_url: "https://www.instagram.com/matrizsaojoseorl/",
 };
 
+// Salmo responsorial usado enquanto a API de liturgia diária não responde.
+export const DAILY_READING_FALLBACK = {
+  text: "Chamarás seu nome Jesus, porque ele salvará o seu povo dos pecados",
+  reference: "Mt 1,21",
+};
+
 export const MASS_SCHEDULE_FALLBACK = [
   { id: "f1", day_label: "Terça a Sexta", time: "19h", note: null },
   { id: "f2", day_label: "Sábado", time: "18h30", note: null },
@@ -171,6 +177,10 @@ export const OTHER_SERVICES = [
 // src/data/liturgicalFeasts.generated.json, gerado a partir da
 // LiturgicalCalendarAPI (ver scripts/fetch-liturgical-calendar.mjs) e
 // mesclado automaticamente pelo componente ImportantDates.
+// `liturgicalColor` (chave de COLORS em liturgicalCalendar.js) é usado só
+// pelo LiturgicalCalendar (página /calendario) para colorir o marcador do
+// dia — ausente quando a data não é uma cor litúrgica oficial (ex.: a
+// efeméride do papa é uma nota histórica da paróquia, não uma solenidade).
 export const IMPORTANT_DATES = [
   {
     key: "sao-jose",
@@ -179,16 +189,23 @@ export const IMPORTANT_DATES = [
     day: 19,
     highlight: true,
     note: "Padroeiro da paróquia",
+    liturgicalColor: "white",
   },
-  { key: "natal", label: "Natal do Senhor", month: 12, day: 25 },
-  { key: "pascoa", label: "Páscoa", movable: "easterSunday" },
-  { key: "corpus-christi", label: "Corpus Christi", movable: "corpusChristi" },
+  { key: "natal", label: "Natal do Senhor", month: 12, day: 25, liturgicalColor: "white" },
+  { key: "pascoa", label: "Páscoa", movable: "easterSunday", liturgicalColor: "white" },
+  {
+    key: "corpus-christi",
+    label: "Corpus Christi",
+    movable: "corpusChristi",
+    liturgicalColor: "white",
+  },
   {
     key: "aparecida",
     label: "Nossa Senhora Aparecida",
     month: 10,
     day: 12,
     note: "Padroeira do Brasil",
+    liturgicalColor: "white",
   },
   {
     key: "papa-leao-xiv",

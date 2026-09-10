@@ -21,6 +21,21 @@ function Svg({ className, children, label }) {
   );
 }
 
+/**
+ * Filete decorativo de canto (moldura discreta), desenhado no canto
+ * superior esquerdo. Rode/espelhe com classes de transform (scale-x/y)
+ * para posicionar nos outros três cantos.
+ */
+export function IconCornerFlourish({ className }) {
+  return (
+    <Svg className={className}>
+      <path d="M2 11V6.5A3.5 3.5 0 0 1 5.5 3H11" />
+      <path d="M2 14.5V17" />
+      <path d="M14.5 3H17" />
+    </Svg>
+  );
+}
+
 export function IconBaptism({ className }) {
   return (
     <Svg className={className}>

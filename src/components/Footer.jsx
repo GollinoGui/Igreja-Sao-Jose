@@ -15,6 +15,12 @@ export function Footer() {
   const { schedule } = useMassSchedule();
   const year = new Date().getFullYear();
   const nextFew = schedule.slice(0, 4);
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    contact.address
+  )}`;
+  const mapsEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
+    contact.address
+  )}&output=embed`;
 
   return (
     <footer className="mesh-emerald grain-overlay relative overflow-hidden text-stone-50">
@@ -100,6 +106,31 @@ export function Footer() {
           >
             Falar no WhatsApp
           </a>
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pb-12">
+        <div className="flex items-center justify-between gap-4 pb-4">
+          <p className="font-sans text-xs font-semibold uppercase tracking-wider text-gold-bright">
+            Como chegar
+          </p>
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm text-stone-50/75 underline decoration-gold-bright/30 underline-offset-4 transition-colors hover:text-gold-bright"
+          >
+            Ver no mapa
+          </a>
+        </div>
+        <div className="overflow-hidden rounded-2xl border border-stone-50/15">
+          <iframe
+            title="Localização da Paróquia São José no mapa"
+            src={mapsEmbedUrl}
+            className="h-52 w-full grayscale-[25%] md:h-64"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </div>
 

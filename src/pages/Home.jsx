@@ -1,15 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Hero } from "../components/Hero";
 import { TrinityDivider } from "../components/TrinityDivider";
-import { ImportantDates } from "../components/ImportantDates";
+import { LiturgicalCalendar } from "../components/LiturgicalCalendar";
 import { ScriptureQuote } from "../components/ScriptureQuote";
+import { BibleAnimation } from "../components/BibleAnimation";
 import { SacramentsCoverflow } from "../components/SacramentsCoverflow";
 import { GallerySection } from "../components/GallerySection";
+import { InstagramEmbed } from "../components/InstagramEmbed";
 import { Reveal } from "../components/Reveal";
 import { Button } from "../components/Button";
 import { useContactInfo } from "../hooks/useContactInfo";
-import { IconCalendar, IconTrinity, IconScroll, IconChevronRight } from "../components/icons";
+import { useDailyReading } from "../hooks/useDailyReading";
+import { useMassSchedule } from "../hooks/useMassSchedule";
+import { useNewsPosts } from "../hooks/useNewsPosts";
+import { groupMassScheduleByDay } from "../lib/massSchedule";
+import { IconCalendar, IconTrinity, IconScroll, IconChevronRight, IconCornerFlourish } from "../components/icons";
 
 const PILLARS = [
   {
@@ -44,6 +50,12 @@ const PILLARS = [
 
 export function Home() {
   const { contact } = useContactInfo();
+  const { reading } = useDailyReading();
+  const { schedule } = useMassSchedule();
+  const { posts, loading: postsLoading } = useNewsPosts();
+
+  const groupedSchedule = useMemo(() => groupMassScheduleByDay(schedule), [schedule]);
+  const recentPosts = posts.slice(0, 2);
 
   useEffect(() => {
     document.title = "Paróquia São José — Orlândia-SP";
@@ -102,6 +114,53 @@ export function Home() {
         </div>
       </section>
 
+      <section className="mesh-stone relative overflow-hidden py-20 md:py-24">
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <Reveal className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span className="text-xs font-medium uppercase tracking-wide text-gold">
+                Missas
+              </span>
+              <h2 className="mt-4 font-serif text-2xl font-semibold text-ink md:text-3xl">
+                Próximas celebrações
+              </h2>
+              <p className="mt-2 max-w-md text-ink/70">
+                Participe da Eucaristia com a comunidade, na Igreja Matriz.
+              </p>
+            </div>
+            <Link
+              to="/missas"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-green-deep hover:text-green-mid"
+            >
+              Ver todos os horários
+              <IconChevronRight className="h-3.5 w-3.5" />
+            </Link>
+          </Reveal>
+
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {groupedSchedule.map((group, index) => (
+              <Reveal
+                key={group.day_label}
+                delay={index * 90}
+                className="flex flex-col gap-3 rounded-2xl border border-stone-200 bg-stone-50 p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+              >
+                <p className="font-serif text-lg font-semibold text-ink">{group.day_label}</p>
+                <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                  {group.items.map((item) => (
+                    <span key={item.id} className="font-sans text-base font-medium text-green-deep">
+                      {item.time}
+                      {item.note && (
+                        <span className="ml-1.5 text-xs font-normal text-ink/50">({item.note})</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="mesh-emerald grain-overlay relative overflow-hidden py-20 text-stone-50 md:py-24">
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <Reveal className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -116,18 +175,46 @@ export function Home() {
             </div>
           </Reveal>
           <div className="mt-10">
-            <ImportantDates />
+            <LiturgicalCalendar />
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <Reveal className="mx-auto max-w-2xl text-center">
+      <section className="mx-auto max-w-6xl px-6 py-28 md:py-36">
+        <Reveal className="relative mx-auto max-w-2xl px-8 text-center sm:px-12">
+          <IconCornerFlourish
+            className="pointer-events-none absolute -left-1 -top-1 h-9 w-9 text-gold/40 sm:-left-3 sm:-top-3 sm:h-12 sm:w-12"
+          />
+          <IconCornerFlourish
+            className="pointer-events-none absolute -right-1 -top-1 h-9 w-9 -scale-x-100 text-gold/40 sm:-right-3 sm:-top-3 sm:h-12 sm:w-12"
+          />
+          <IconCornerFlourish
+            className="pointer-events-none absolute -bottom-1 -left-1 h-9 w-9 -scale-y-100 text-gold/40 sm:-bottom-3 sm:-left-3 sm:h-12 sm:w-12"
+          />
+          <IconCornerFlourish
+            className="pointer-events-none absolute -bottom-1 -right-1 h-9 w-9 -scale-100 text-gold/40 sm:-bottom-3 sm:-right-3 sm:h-12 sm:w-12"
+          />
+          <span className="text-xs font-medium uppercase tracking-wide text-gold">
+            Liturgia do dia
+          </span>
+          {reading.liturgyName && (
+            <p className="mt-3 font-serif text-lg text-ink/55">{reading.liturgyName}</p>
+          )}
+          <BibleAnimation className="mx-auto mt-10 mb-6 h-40 w-40 md:h-56 md:w-56" />
           <ScriptureQuote
             className="mx-auto"
-            text="Chamarás seu nome Jesus, porque ele salvará o seu povo dos pecados"
-            reference="Mt 1,21"
+            text={reading.text}
+            reference={reading.reference}
           />
+          {reading.readings?.length > 0 && (
+            <div className="mx-auto mt-12 flex max-w-lg flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-stone-200 pt-8">
+              {reading.readings.map((item) => (
+                <span key={item.label} className="text-sm text-ink/55">
+                  <span className="font-medium text-ink/75">{item.label}</span> {item.reference}
+                </span>
+              ))}
+            </div>
+          )}
         </Reveal>
       </section>
 
@@ -149,6 +236,59 @@ export function Home() {
           </Reveal>
           <SacramentsCoverflow whatsappUrl={contact.whatsapp_url} />
         </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-20 md:py-24">
+        <Reveal className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <span className="text-xs font-medium uppercase tracking-wide text-terracotta">
+              Notícias
+            </span>
+            <h2 className="mt-4 font-serif text-2xl font-semibold text-ink md:text-3xl">
+              Do Instagram da paróquia
+            </h2>
+            <p className="mt-2 max-w-md text-ink/70">
+              Acompanhe avisos, fotos de celebrações e a agenda da comunidade.
+            </p>
+          </div>
+          <Link
+            to="/noticias"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-terracotta hover:text-terracotta-bright"
+          >
+            Ver mais notícias
+            <IconChevronRight className="h-3.5 w-3.5" />
+          </Link>
+        </Reveal>
+
+        {!postsLoading && recentPosts.length === 0 && (
+          <Reveal className="mt-10 rounded-2xl border border-dashed border-stone-200 p-8 text-center text-ink/60">
+            Nenhuma publicação cadastrada ainda. Acompanhe as novidades
+            diretamente no{" "}
+            <a
+              href={contact.instagram_url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-green-mid underline decoration-stone-200 underline-offset-4 hover:text-gold"
+            >
+              Instagram @matrizsaojoseorl
+            </a>
+            .
+          </Reveal>
+        )}
+
+        {recentPosts.length > 0 && (
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {recentPosts.map((post, index) => (
+              <Reveal
+                key={post.id}
+                delay={index * 100}
+                className="rounded-2xl border border-stone-200 bg-stone-50 p-2 shadow-soft"
+              >
+                <InstagramEmbed embedUrl={post.embed_url} caption={post.caption} />
+              </Reveal>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="relative overflow-hidden bg-stone-200/50 py-16 md:py-20">
