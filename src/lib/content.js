@@ -131,6 +131,47 @@ export const SACRAMENTS = [
   },
 ];
 
+// Párocos que passaram pela paróquia, do mais antigo ao atual (`current:
+// true` em só um item — é quem abre centralizado na roda de PriestsOrbit,
+// ver src/components/PriestsOrbit.jsx). `photo` é opcional: import local de
+// src/assets/images, ou `null` para o avatar mostrar as iniciais do nome.
+// PLACEHOLDER — nomes e períodos ainda não confirmados pela paróquia;
+// substituir pela lista real assim que o cliente enviar.
+export const PARISH_PRIESTS = [
+  {
+    id: "p1",
+    name: "Pe. [nome]",
+    role: "Pároco",
+    period: "19XX–19XX",
+    photo: null,
+    current: false,
+  },
+  {
+    id: "p2",
+    name: "Pe. [nome]",
+    role: "Pároco",
+    period: "19XX–19XX",
+    photo: null,
+    current: false,
+  },
+  {
+    id: "p3",
+    name: "Pe. [nome]",
+    role: "Pároco",
+    period: "19XX–20XX",
+    photo: null,
+    current: false,
+  },
+  {
+    id: "atual",
+    name: "Pe. [nome do pároco atual]",
+    role: "Pároco atual",
+    period: "desde 20XX",
+    photo: null,
+    current: true,
+  },
+];
+
 // Fotos-placeholder da galeria diagonal da Home (seção entre a leitura do
 // dia e os sacramentos). Aleatórias de propósito — trocar pelas fotos reais
 // da paróquia assim que o site for aprovado pelo cliente, via o futuro

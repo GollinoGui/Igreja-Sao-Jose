@@ -63,7 +63,7 @@ export function useCarpetPush(markerRef, boxRef, prefersReducedMotion) {
             trigger: markerEl,
             start: "top 70%",
             end: "top 10%",
-            scrub: 0.4,
+            scrub: 0.8,
             onLeave: (self) => {
               self.kill();
               gsap.set(boxEl, { height: `${targetHeight}px` });

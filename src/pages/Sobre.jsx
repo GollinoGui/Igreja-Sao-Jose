@@ -5,6 +5,7 @@ import { ScriptureQuote } from "../components/ScriptureQuote";
 import { StatCard } from "../components/StatCard";
 import { Reveal } from "../components/Reveal";
 import { Button } from "../components/Button";
+import { PriestsOrbit } from "../components/PriestsOrbit";
 import {
   IconTower,
   IconScroll,
@@ -187,6 +188,24 @@ export function Sobre() {
               <p className="text-sm text-ink/65">{element.text}</p>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="mesh-emerald grain-overlay relative overflow-hidden py-20 text-stone-50 md:py-24">
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
+          <Reveal className="mb-12 max-w-lg text-center sm:mx-auto">
+            <span className="text-xs font-medium uppercase tracking-wide text-gold-bright">
+              Pastoreio
+            </span>
+            <h2 className="mt-3 font-serif text-2xl font-semibold md:text-3xl">
+              Párocos que já passaram pela paróquia
+            </h2>
+            <p className="mt-3 text-stone-50/75">
+              Ao longo de mais de 130 anos, diversos padres conduziram a vida
+              pastoral da Paróquia São José.
+            </p>
+          </Reveal>
+          <PriestsOrbit />
         </div>
       </section>
 
