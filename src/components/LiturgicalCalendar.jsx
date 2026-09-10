@@ -102,7 +102,7 @@ export function LiturgicalCalendar() {
           <h3 className="font-serif text-2xl font-semibold text-stone-50 md:text-3xl">
             {capitalize(currentMonth.toLocaleDateString("pt-BR", { month: "long", year: "numeric" }))}
           </h3>
-          <p className="mt-1 text-sm text-stone-50/60">
+          <p className="mt-1 text-sm text-stone-50/70">
             Toque em um dia para ver a celebração e a cor litúrgica.
           </p>
         </div>
@@ -133,7 +133,7 @@ export function LiturgicalCalendar() {
         </div>
       </Reveal>
 
-      <Reveal delay={80} className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-stone-50/55">
+      <Reveal delay={80} className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-stone-50/70">
         <span className="inline-flex items-center gap-1.5">
           <IconStar className="h-3 w-3 text-gold-bright" />
           Destaque da paróquia
@@ -143,19 +143,23 @@ export function LiturgicalCalendar() {
           Solenidade / festa
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="flex items-center gap-0.5" aria-hidden="true">
+          <span className="flex items-center gap-1" aria-hidden="true">
             {Object.values(COLORS).map((color) => (
-              <span key={color.token} className="h-2 w-2 rounded-full" style={{ backgroundColor: color.hex }} />
+              <span
+                key={color.token}
+                className="h-2.5 w-2.5 rounded-full ring-1 ring-stone-50/40"
+                style={{ backgroundColor: color.hex }}
+              />
             ))}
           </span>
           Cor litúrgica do dia
         </span>
       </Reveal>
 
-      <Reveal delay={120} className="mt-6 overflow-hidden rounded-2xl border border-stone-50/10">
-        <div className="grid grid-cols-7 text-center text-[11px] font-medium uppercase tracking-wide text-stone-50/50">
+      <Reveal delay={120} className="mt-6 overflow-hidden rounded-2xl border border-stone-50/15">
+        <div className="grid grid-cols-7 text-center text-[11px] font-medium uppercase tracking-wide text-stone-50/60">
           {WEEKDAYS.map((weekday) => (
-            <div key={weekday.short} className="border-b border-stone-50/10 py-2.5">
+            <div key={weekday.short} className="border-b border-stone-50/15 py-2.5">
               <abbr title={weekday.full} className="no-underline">
                 {weekday.short}
               </abbr>
@@ -182,14 +186,14 @@ export function LiturgicalCalendar() {
                 aria-label={`${day.getDate()} de ${day.toLocaleDateString("pt-BR", { month: "long" })}${
                   isToday ? ", hoje" : ""
                 }${highlight ? `, ${highlight.label}` : ""}`}
-                className={`group relative flex min-h-[60px] flex-col items-start gap-1.5 border-b border-r border-stone-50/10 p-1.5 text-left transition-colors last:border-r-0 hover:bg-stone-50/10 sm:min-h-[84px] sm:p-2 md:min-h-[104px] ${
-                  inCurrentMonth ? "" : "opacity-35"
+                className={`group relative flex min-h-[60px] flex-col items-start gap-1.5 border-b border-r border-stone-50/15 p-1.5 text-left transition-colors last:border-r-0 hover:bg-stone-50/10 sm:min-h-[84px] sm:p-2 md:min-h-[104px] ${
+                  inCurrentMonth ? "" : "opacity-45"
                 }`}
               >
                 <time
                   dateTime={day.toISOString().slice(0, 10)}
                   className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-medium sm:h-7 sm:w-7 ${
-                    isToday ? "bg-gold text-stone-900" : isSelected ? "text-stone-50 ring-1 ring-gold-bright" : "text-stone-50/80"
+                    isToday ? "bg-gold text-stone-900" : isSelected ? "text-stone-50 ring-1 ring-gold-bright" : "text-stone-50/85"
                   }`}
                 >
                   {day.getDate()}
@@ -212,18 +216,18 @@ export function LiturgicalCalendar() {
                       ))}
                     </div>
                     <div className="hidden w-full md:block">
-                      <p className="flex items-center gap-1 text-[11px] leading-tight text-stone-50/75">
+                      <p className="flex items-center gap-1 text-[11px] leading-tight text-stone-50/90">
                         {highlight && <IconStar className="h-2.5 w-2.5 shrink-0 text-gold-bright" />}
                         <span className="min-w-0 flex-1 truncate">{events[0].label}</span>
                       </p>
-                      {events.length > 1 && <p className="text-[10px] text-stone-50/45">+{events.length - 1} mais</p>}
+                      {events.length > 1 && <p className="text-[10px] text-stone-50/60">+{events.length - 1} mais</p>}
                     </div>
                   </>
                 )}
 
                 <span
                   aria-hidden="true"
-                  className="absolute inset-x-1.5 bottom-1 h-[3px] rounded-full shadow-[0_0_0_1px_rgba(246,242,232,0.2)]"
+                  className="absolute inset-x-1.5 bottom-1 h-1 rounded-full shadow-[0_0_0_1px_rgba(246,242,232,0.35)]"
                   style={{ backgroundColor: info.hex }}
                 />
               </button>
@@ -232,7 +236,7 @@ export function LiturgicalCalendar() {
         </div>
       </Reveal>
 
-      <Reveal delay={160} className="mt-8 rounded-2xl bg-stone-50/8 p-6 sm:p-8">
+      <Reveal delay={160} className="mt-8 rounded-2xl border border-stone-50/12 bg-stone-50/12 p-6 sm:p-8">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-gold-bright">
@@ -242,29 +246,33 @@ export function LiturgicalCalendar() {
               {selectedDay.getDate()} de {capitalize(selectedDay.toLocaleDateString("pt-BR", { month: "long" }))}
             </h4>
           </div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-stone-50/15 px-3 py-1.5 text-xs font-medium text-stone-50/80">
-            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: selectedLiturgical.hex }} aria-hidden="true" />
+          <span className="inline-flex items-center gap-2 rounded-full border border-stone-50/20 px-3 py-1.5 text-xs font-medium text-stone-50/90">
+            <span
+              className="h-2.5 w-2.5 rounded-full ring-1 ring-stone-50/40"
+              style={{ backgroundColor: selectedLiturgical.hex }}
+              aria-hidden="true"
+            />
             {selectedLiturgical.season}
           </span>
         </div>
 
-        <div className="mt-5 flex flex-col gap-3 border-t border-stone-50/10 pt-5">
+        <div className="mt-5 flex flex-col gap-3 border-t border-stone-50/15 pt-5">
           {selectedEvents.length > 0 ? (
             selectedEvents.map((event) => (
               <div key={event.key} className="flex items-start gap-2.5">
                 {event.highlight ? (
                   <IconStar className="mt-0.5 h-4 w-4 shrink-0 text-gold-bright" />
                 ) : (
-                  <IconCalendar className="mt-0.5 h-4 w-4 shrink-0 text-stone-50/40" />
+                  <IconCalendar className="mt-0.5 h-4 w-4 shrink-0 text-stone-50/50" />
                 )}
                 <div>
                   <p className="font-serif text-base font-medium text-stone-50">{event.label}</p>
-                  {event.note && <p className="text-sm text-stone-50/55">{event.note}</p>}
+                  {event.note && <p className="text-sm text-stone-50/65">{event.note}</p>}
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-sm text-stone-50/60">
+            <p className="text-sm text-stone-50/70">
               Nenhuma celebração especial neste dia. Confira os{" "}
               <Link to="/missas" className="font-medium text-gold-bright underline-offset-4 hover:underline">
                 horários de missa

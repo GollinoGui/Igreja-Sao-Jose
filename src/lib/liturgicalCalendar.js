@@ -70,9 +70,9 @@ function getAdventStart(year) {
 }
 
 export const COLORS = {
-  green: { name: "Verde", hex: "var(--color-green-deep)", token: "green-deep" },
-  purple: { name: "Roxo", hex: "var(--color-liturgical-purple)", token: "liturgical-purple" },
-  red: { name: "Vermelho", hex: "var(--color-liturgical-red)", token: "liturgical-red" },
+  green: { name: "Verde", hex: "var(--color-season-green)", token: "season-green" },
+  purple: { name: "Roxo", hex: "var(--color-season-purple)", token: "season-purple" },
+  red: { name: "Vermelho", hex: "var(--color-season-red)", token: "season-red" },
   white: { name: "Branco e Dourado", hex: "var(--color-gold)", token: "gold" },
 };
 

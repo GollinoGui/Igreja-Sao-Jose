@@ -16,11 +16,18 @@
   --color-terracotta: #96492c;
   --color-terracotta-bright: #bf6a3f;
 
-  /* Cores litúrgicas dinâmicas — usadas apenas pelo indicador do dia,
-     nunca como repintura geral do site. Verde e dourado reaproveitam
-     green-deep e gold acima. */
+  /* Cores litúrgicas "de texto" (erro em formulários do admin, sobre fundo
+     claro) — não usar no calendário, que fica sobre fundo verde escuro e
+     precisa de tons mais claros para não desaparecer (ver season-* abaixo). */
   --color-liturgical-purple: #4a2338;
   --color-liturgical-red: #7c2b2e;
+
+  /* Indicador de cor litúrgica do LiturgicalCalendar (dia-a-dia), calibrado
+     para contraste sobre o fundo .mesh-emerald (green-deep). Dourado
+     reaproveita --color-gold, que já é claro o suficiente. */
+  --color-season-green: #7cb08c;
+  --color-season-purple: #b07aa8;
+  --color-season-red: #d96468;
 
   --font-serif: "Piazzolla", ui-serif, Georgia, serif;
   --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
