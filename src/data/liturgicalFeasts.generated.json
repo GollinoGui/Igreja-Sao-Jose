@@ -1,0 +1,362 @@
+[
+  {
+    "key": "ImmaculateConception",
+    "label": "Imaculada Conceição de Nossa Senhora",
+    "year": 2025,
+    "month": 12,
+    "day": 8,
+    "color": "white"
+  },
+  {
+    "key": "StStephenProtomartyr",
+    "label": "Santo Estêvão, Protomártir",
+    "year": 2025,
+    "month": 12,
+    "day": 26,
+    "color": "red"
+  },
+  {
+    "key": "StJohnEvangelist",
+    "label": "São João Evangelista",
+    "year": 2025,
+    "month": 12,
+    "day": 27,
+    "color": "white"
+  },
+  {
+    "key": "MaryMotherOfGod",
+    "label": "Maria, Mãe de Deus",
+    "year": 2026,
+    "month": 1,
+    "day": 1,
+    "color": "white"
+  },
+  {
+    "key": "Annunciation",
+    "label": "Anunciação do Senhor",
+    "year": 2026,
+    "month": 3,
+    "day": 25,
+    "color": "white"
+  },
+  {
+    "key": "StMarkEvangelist",
+    "label": "São Marcos Evangelista",
+    "year": 2026,
+    "month": 4,
+    "day": 25,
+    "color": "red"
+  },
+  {
+    "key": "SacredHeart",
+    "label": "Sagrado Coração de Jesus",
+    "year": 2026,
+    "month": 6,
+    "day": 12,
+    "color": "red"
+  },
+  {
+    "key": "NativityJohnBaptist",
+    "label": "Natividade de São João Batista",
+    "year": 2026,
+    "month": 6,
+    "day": 24,
+    "color": "white"
+  },
+  {
+    "key": "StsPeterPaulAp",
+    "label": "São Pedro e São Paulo",
+    "year": 2026,
+    "month": 6,
+    "day": 29,
+    "color": "red"
+  },
+  {
+    "key": "StThomasAp",
+    "label": "São Tomé Apóstolo",
+    "year": 2026,
+    "month": 7,
+    "day": 3,
+    "color": "red"
+  },
+  {
+    "key": "StJamesAp",
+    "label": "São Tiago Apóstolo",
+    "year": 2026,
+    "month": 7,
+    "day": 25,
+    "color": "red"
+  },
+  {
+    "key": "StLawrenceDeacon",
+    "label": "São Lourenço, Diácono e Mártir",
+    "year": 2026,
+    "month": 8,
+    "day": 10,
+    "color": "white"
+  },
+  {
+    "key": "Assumption",
+    "label": "Assunção de Nossa Senhora",
+    "year": 2026,
+    "month": 8,
+    "day": 15,
+    "color": "white"
+  },
+  {
+    "key": "StBartholomewAp",
+    "label": "São Bartolomeu Apóstolo",
+    "year": 2026,
+    "month": 8,
+    "day": 24,
+    "color": "red"
+  },
+  {
+    "key": "NativityVirginMary",
+    "label": "Natividade de Nossa Senhora",
+    "year": 2026,
+    "month": 9,
+    "day": 8,
+    "color": "white"
+  },
+  {
+    "key": "StMatthewEvangelist",
+    "label": "São Mateus, Apóstolo e Evangelista",
+    "year": 2026,
+    "month": 9,
+    "day": 21,
+    "color": "red"
+  },
+  {
+    "key": "StsArchangels",
+    "label": "São Miguel, São Gabriel e São Rafael, Arcanjos",
+    "year": 2026,
+    "month": 9,
+    "day": 29,
+    "color": "white"
+  },
+  {
+    "key": "StSimonStJudeAp",
+    "label": "São Simão e São Judas Tadeu, Apóstolos",
+    "year": 2026,
+    "month": 10,
+    "day": 28,
+    "color": "red"
+  },
+  {
+    "key": "AllSaints",
+    "label": "Todos os Santos",
+    "year": 2026,
+    "month": 11,
+    "day": 1,
+    "color": "white"
+  },
+  {
+    "key": "ChristKing",
+    "label": "Cristo Rei",
+    "year": 2026,
+    "month": 11,
+    "day": 22,
+    "color": "white"
+  },
+  {
+    "key": "StAndrewAp",
+    "label": "Santo André Apóstolo",
+    "year": 2026,
+    "month": 11,
+    "day": 30,
+    "color": "red"
+  },
+  {
+    "key": "ImmaculateConception",
+    "label": "Imaculada Conceição de Nossa Senhora",
+    "year": 2026,
+    "month": 12,
+    "day": 8,
+    "color": "white"
+  },
+  {
+    "key": "StStephenProtomartyr",
+    "label": "Santo Estêvão, Protomártir",
+    "year": 2026,
+    "month": 12,
+    "day": 26,
+    "color": "red"
+  },
+  {
+    "key": "HolyInnocents",
+    "label": "Santos Inocentes, Mártires",
+    "year": 2026,
+    "month": 12,
+    "day": 28,
+    "color": "red"
+  },
+  {
+    "key": "MaryMotherOfGod",
+    "label": "Maria, Mãe de Deus",
+    "year": 2027,
+    "month": 1,
+    "day": 1,
+    "color": "white"
+  },
+  {
+    "key": "ConversionStPaul",
+    "label": "Conversão de São Paulo Apóstolo",
+    "year": 2027,
+    "month": 1,
+    "day": 25,
+    "color": "white"
+  },
+  {
+    "key": "ChairStPeter",
+    "label": "Cátedra de São Pedro",
+    "year": 2027,
+    "month": 2,
+    "day": 22,
+    "color": "white"
+  },
+  {
+    "key": "Annunciation",
+    "label": "Anunciação do Senhor",
+    "year": 2027,
+    "month": 4,
+    "day": 5,
+    "color": "white"
+  },
+  {
+    "key": "StsPhilipJames",
+    "label": "São Filipe e São Tiago, Apóstolos",
+    "year": 2027,
+    "month": 5,
+    "day": 3,
+    "color": "red"
+  },
+  {
+    "key": "StMatthiasAp",
+    "label": "São Matias Apóstolo",
+    "year": 2027,
+    "month": 5,
+    "day": 14,
+    "color": "red"
+  },
+  {
+    "key": "Visitation",
+    "label": "Visitação de Nossa Senhora",
+    "year": 2027,
+    "month": 5,
+    "day": 31,
+    "color": "white"
+  },
+  {
+    "key": "SacredHeart",
+    "label": "Sagrado Coração de Jesus",
+    "year": 2027,
+    "month": 6,
+    "day": 4,
+    "color": "red"
+  },
+  {
+    "key": "NativityJohnBaptist",
+    "label": "Natividade de São João Batista",
+    "year": 2027,
+    "month": 6,
+    "day": 24,
+    "color": "white"
+  },
+  {
+    "key": "StsPeterPaulAp",
+    "label": "São Pedro e São Paulo",
+    "year": 2027,
+    "month": 6,
+    "day": 29,
+    "color": "red"
+  },
+  {
+    "key": "StThomasAp",
+    "label": "São Tomé Apóstolo",
+    "year": 2027,
+    "month": 7,
+    "day": 3,
+    "color": "red"
+  },
+  {
+    "key": "StLawrenceDeacon",
+    "label": "São Lourenço, Diácono e Mártir",
+    "year": 2027,
+    "month": 8,
+    "day": 10,
+    "color": "white"
+  },
+  {
+    "key": "Assumption",
+    "label": "Assunção de Nossa Senhora",
+    "year": 2027,
+    "month": 8,
+    "day": 15,
+    "color": "white"
+  },
+  {
+    "key": "StBartholomewAp",
+    "label": "São Bartolomeu Apóstolo",
+    "year": 2027,
+    "month": 8,
+    "day": 24,
+    "color": "red"
+  },
+  {
+    "key": "NativityVirginMary",
+    "label": "Natividade de Nossa Senhora",
+    "year": 2027,
+    "month": 9,
+    "day": 8,
+    "color": "white"
+  },
+  {
+    "key": "StMatthewEvangelist",
+    "label": "São Mateus, Apóstolo e Evangelista",
+    "year": 2027,
+    "month": 9,
+    "day": 21,
+    "color": "red"
+  },
+  {
+    "key": "StsArchangels",
+    "label": "São Miguel, São Gabriel e São Rafael, Arcanjos",
+    "year": 2027,
+    "month": 9,
+    "day": 29,
+    "color": "white"
+  },
+  {
+    "key": "StLukeEvangelist",
+    "label": "São Lucas Evangelista",
+    "year": 2027,
+    "month": 10,
+    "day": 18,
+    "color": "red"
+  },
+  {
+    "key": "StSimonStJudeAp",
+    "label": "São Simão e São Judas Tadeu, Apóstolos",
+    "year": 2027,
+    "month": 10,
+    "day": 28,
+    "color": "red"
+  },
+  {
+    "key": "AllSaints",
+    "label": "Todos os Santos",
+    "year": 2027,
+    "month": 11,
+    "day": 1,
+    "color": "white"
+  },
+  {
+    "key": "ChristKing",
+    "label": "Cristo Rei",
+    "year": 2027,
+    "month": 11,
+    "day": 21,
+    "color": "white"
+  }
+]

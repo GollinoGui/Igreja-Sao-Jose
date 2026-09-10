@@ -1,16 +1,16 @@
 import { useMemo } from "react";
 import { IMPORTANT_DATES } from "../lib/content";
 import { getMovableFeasts } from "../lib/liturgicalCalendar";
+import GENERATED_FEASTS from "../data/liturgicalFeasts.generated.json";
 import { Reveal } from "./Reveal";
 import { IconStar, IconCalendar } from "./icons";
 
-function resolveDate(item, movableFeasts, year) {
-  if (item.movable) {
-    const date = movableFeasts[item.movable];
-    return date ?? null;
-  }
-  return new Date(year, item.month - 1, item.day);
-}
+// Quantos cards mostrar no total: os fixos com `highlight` sempre aparecem,
+// o restante do espaço é preenchido pelas datas (manuais + geradas) mais
+// próximas de hoje. Ver src/data/liturgicalFeasts.generated.json para as
+// solenidades/festas do Calendário Romano Geral (gerado por
+// scripts/fetch-liturgical-calendar.mjs a partir da LiturgicalCalendarAPI).
+const MAX_ITEMS = 9;
 
 function formatDate(date) {
   if (!date) return "a definir";
@@ -18,33 +18,63 @@ function formatDate(date) {
 }
 
 function daysUntil(date) {
-  if (!date) return null;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const target = new Date(date);
   target.setHours(0, 0, 0, 0);
-  const diff = Math.round((target - today) / 86_400_000);
-  return diff;
+  return Math.round((target - today) / 86_400_000);
+}
+
+// Para cada item, gera as datas candidatas deste ano e do próximo, e
+// mantém a ocorrência mais próxima com diff >= 0 (hoje ou no futuro).
+function nearestOccurrence(candidates) {
+  let best = null;
+  for (const { date, ...rest } of candidates) {
+    if (!date) continue;
+    const diff = daysUntil(date);
+    if (diff < 0) continue;
+    if (!best || diff < best.diff) best = { ...rest, date, diff };
+  }
+  return best;
 }
 
 export function ImportantDates() {
   const year = new Date().getFullYear();
   const movableFeasts = useMemo(() => getMovableFeasts(year), [year]);
+  const movableFeastsNextYear = useMemo(() => getMovableFeasts(year + 1), [year]);
 
   const items = useMemo(() => {
-    return IMPORTANT_DATES.map((item) => {
-      const date = resolveDate(item, movableFeasts, year);
-      let diff = daysUntil(date);
-      if (diff !== null && diff < 0) {
-        const nextYearFeasts = item.movable ? getMovableFeasts(year + 1) : null;
-        const nextDate = item.movable
-          ? nextYearFeasts[item.movable]
-          : new Date(year + 1, item.month - 1, item.day);
-        diff = daysUntil(nextDate);
-      }
-      return { ...item, date, diff };
+    const manual = IMPORTANT_DATES.map((item) => {
+      const candidates = item.movable
+        ? [
+            { date: movableFeasts[item.movable] },
+            { date: movableFeastsNextYear[item.movable] },
+          ]
+        : [
+            { date: new Date(year, item.month - 1, item.day) },
+            { date: new Date(year + 1, item.month - 1, item.day) },
+          ];
+      return nearestOccurrence(
+        candidates.map((c) => ({ ...c, key: item.key, label: item.label, note: item.note, highlight: item.highlight })),
+      );
     });
-  }, [movableFeasts, year]);
+
+    const generatedByKey = new Map();
+    for (const feast of GENERATED_FEASTS) {
+      const date = new Date(feast.year, feast.month - 1, feast.day);
+      const occurrence = { key: feast.key, label: feast.label, note: null, highlight: false, date };
+      const current = generatedByKey.get(feast.key);
+      const diff = daysUntil(date);
+      if (diff < 0) continue;
+      if (!current || diff < current.diff) generatedByKey.set(feast.key, { ...occurrence, diff });
+    }
+
+    const all = [...manual, ...generatedByKey.values()].filter(Boolean);
+    const highlighted = all.filter((item) => item.highlight);
+    const rest = all.filter((item) => !item.highlight).sort((a, b) => a.diff - b.diff);
+
+    return [...highlighted, ...rest].slice(0, MAX_ITEMS);
+  }, [movableFeasts, movableFeastsNextYear, year]);
 
   return (
     <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

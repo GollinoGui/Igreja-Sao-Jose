@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/fetch-liturgical-calendar.mjs",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:liturgical": "node scripts/fetch-liturgical-calendar.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.115.0",

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Hero } from "../components/Hero";
 import { TrinityDivider } from "../components/TrinityDivider";
 import { ImportantDates } from "../components/ImportantDates";
@@ -8,32 +9,36 @@ import { GallerySection } from "../components/GallerySection";
 import { Reveal } from "../components/Reveal";
 import { Button } from "../components/Button";
 import { useContactInfo } from "../hooks/useContactInfo";
-import { IconCalendar, IconTrinity, IconScroll } from "../components/icons";
+import { IconCalendar, IconTrinity, IconScroll, IconChevronRight } from "../components/icons";
 
 const PILLARS = [
   {
     title: "Celebrar",
-    text: "Missas de terça a domingo, na Igreja Matriz — confira os horários atualizados e venha participar da Eucaristia com a comunidade.",
+    text: "Missas de terça a domingo, na Igreja Matriz. Confira os horários atualizados e venha participar da Eucaristia com a comunidade.",
     to: "/missas",
     cta: "Ver horários",
     icon: IconCalendar,
-    accent: "bg-gold text-stone-900",
+    ring: "border-gold text-gold",
+    link: "text-gold hover:text-gold-bright",
   },
   {
     title: "Pertencer",
-    text: "Batismo, matrimônio, intenções de missa e outros sacramentos, sempre pela secretaria paroquial — o primeiro passo é uma conversa com a nossa equipe.",
+    text: "Batismo, matrimônio, intenções de missa e outros sacramentos, sempre pela secretaria paroquial. O primeiro passo é uma conversa com a nossa equipe.",
     to: "/contato",
     cta: "Falar com a secretaria",
     icon: IconTrinity,
-    accent: "bg-green-deep text-stone-50",
+    ring: "border-green-deep text-green-deep",
+    link: "text-green-deep hover:text-green-mid",
+    lead: true,
   },
   {
     title: "Conhecer",
-    text: "Mais de 130 anos de história, da antiga capela de madeira à Torre Monumento — conheça os marcos que formam a nossa identidade.",
+    text: "Mais de 130 anos de história, da antiga capela de madeira à Torre Monumento. Conheça os marcos que formam a nossa identidade.",
     to: "/sobre",
     cta: "Ler a história",
     icon: IconScroll,
-    accent: "bg-terracotta text-stone-50",
+    ring: "border-terracotta text-terracotta",
+    link: "text-terracotta hover:text-terracotta-bright",
   },
 ];
 
@@ -51,31 +56,49 @@ export function Home() {
       <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal className="mx-auto max-w-xl text-center">
           <TrinityDivider className="mb-8" />
-          <p className="font-sans text-sm text-ink/60">
-            Assim como os três sinos da Torre Monumento soam juntos em uma só
-            voz, a nossa comunidade se apoia em três pilares.
+          <h2 className="font-serif text-2xl font-semibold text-ink md:text-3xl">
+            Uma só voz, três pilares
+          </h2>
+          <p className="mt-3 font-sans text-sm text-ink/60">
+            Assim como os três sinos da Torre Monumento soam juntos, a nossa
+            comunidade se apoia nestes pilares: cada um com seu papel, todos
+            voltados para a mesma fé.
           </p>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {PILLARS.map((pillar, index) => (
-            <Reveal
-              key={pillar.title}
-              delay={index * 120}
-              className="group flex flex-col gap-4 rounded-2xl border border-stone-200 bg-stone-50 p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift"
-            >
-              <div
-                className={`flex h-12 w-12 items-center justify-center rounded-xl ${pillar.accent} transition-transform duration-300 group-hover:scale-110`}
+        <div className="relative mt-16">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-8 hidden h-px bg-stone-200 md:block"
+          />
+          <div className="grid grid-cols-1 gap-y-12 md:grid-cols-3 md:divide-x md:divide-stone-200">
+            {PILLARS.map((pillar, index) => (
+              <Reveal
+                key={pillar.title}
+                delay={index * 120}
+                className="group flex flex-col gap-4 md:px-8 md:first:pl-0 md:last:pr-0"
               >
-                <pillar.icon className="h-6 w-6" />
-              </div>
-              <h2 className="font-serif text-xl font-semibold text-ink">{pillar.title}</h2>
-              <p className="flex-1 text-sm leading-relaxed text-ink/70">{pillar.text}</p>
-              <Button as="link" to={pillar.to} variant="secondary" className="self-start">
-                {pillar.cta}
-              </Button>
-            </Reveal>
-          ))}
+                <div className="flex h-16 items-center">
+                  <div
+                    className={`flex items-center justify-center rounded-full border-2 bg-stone-50 transition-transform duration-300 group-hover:scale-110 ${pillar.ring} ${
+                      pillar.lead ? "h-16 w-16" : "h-14 w-14"
+                    }`}
+                  >
+                    <pillar.icon className={pillar.lead ? "h-7 w-7" : "h-6 w-6"} />
+                  </div>
+                </div>
+                <h3 className="font-serif text-xl font-semibold text-ink">{pillar.title}</h3>
+                <p className="flex-1 text-sm leading-relaxed text-ink/70">{pillar.text}</p>
+                <Link
+                  to={pillar.to}
+                  className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${pillar.link}`}
+                >
+                  {pillar.cta}
+                  <IconChevronRight className="h-3.5 w-3.5" />
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

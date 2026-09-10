@@ -157,9 +157,20 @@ export const OTHER_SERVICES = [
   },
 ];
 
-// Datas importantes do calendário litúrgico. `movable: true` sinaliza que a
-// data varia a cada ano; nesse caso `month`/`day` ficam nulos e a data é
-// calculada em tempo real a partir da Páscoa (ver src/lib/liturgicalCalendar.js).
+// Datas cadastradas manualmente: eventos específicos da paróquia/diocese/
+// Igreja no Brasil que nenhuma API de calendário litúrgico cobre (padroeiro
+// local, padroeira do Brasil, aniversário de eleição do papa), mais Natal e
+// Páscoa, sempre exibidos por serem os mais conhecidos do público.
+//
+// `movable: true` sinaliza que a data varia a cada ano; nesse caso
+// `month`/`day` ficam nulos e a data é calculada em tempo real a partir da
+// Páscoa (ver src/lib/liturgicalCalendar.js).
+//
+// As demais solenidades e festas de data fixa do Calendário Romano Geral
+// (Todos os Santos, Assunção, apóstolos, etc.) vêm de
+// src/data/liturgicalFeasts.generated.json, gerado a partir da
+// LiturgicalCalendarAPI (ver scripts/fetch-liturgical-calendar.mjs) e
+// mesclado automaticamente pelo componente ImportantDates.
 export const IMPORTANT_DATES = [
   {
     key: "sao-jose",
@@ -172,11 +183,18 @@ export const IMPORTANT_DATES = [
   { key: "natal", label: "Natal do Senhor", month: 12, day: 25 },
   { key: "pascoa", label: "Páscoa", movable: "easterSunday" },
   { key: "corpus-christi", label: "Corpus Christi", movable: "corpusChristi" },
-  { key: "finados", label: "Finados", month: 11, day: 2 },
   {
-    key: "imaculada",
-    label: "Imaculada Conceição",
-    month: 12,
+    key: "aparecida",
+    label: "Nossa Senhora Aparecida",
+    month: 10,
+    day: 12,
+    note: "Padroeira do Brasil",
+  },
+  {
+    key: "papa-leao-xiv",
+    label: "Eleição do Papa Leão XIV",
+    month: 5,
     day: 8,
+    note: "Aniversário de eleição do papa",
   },
 ];
